@@ -1,7 +1,7 @@
 // === Admin Panel Logic ===
 (function () {
     // Default password hash (SHA-256 of "admin@123")
-    const DEFAULT_PASS_HASH = '7676aaafb027c825bd9abab78b234070e702752f625b752e55e55b48e607e358';
+    const DEFAULT_PASS_HASH = '2ca53b546c581524395edb84b510eb95b82ecb9c58b7cc1692e306667d8eb8a2';
 
     // --- Utility: Simple SHA-256 hash ---
     async function hashPassword(password) {
