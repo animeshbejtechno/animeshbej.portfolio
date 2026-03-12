@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Animesh Bej</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="particles"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="logo-bracket">&lt;</span>Animesh<span class="logo-bracket">/&gt;</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="skills.html">Skills</a></li>
+                <li><a href="projects.html" class="active">Projects</a></li>
+                <li><a href="certificates.html">Certificates</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Projects Section -->
+    <section class="page-section">
+        <div class="section-container">
+            <h1 class="section-title" data-aos="fade-up">
+                <span class="title-accent">My</span> Projects
+            </h1>
+
+            <div class="projects-grid">
+                <!-- Project 1: Mini Red Team -->
+                <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="project-image">
+                        <div class="project-placeholder">
+                            <i class="fas fa-skull-crossbones"></i>
+                        </div>
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="https://github.com/animeshbejtechno" target="_blank" class="project-link">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Mini Red Team Project</h3>
+                        <p>Conducted offensive security exercises in TryHackMe labs — reconnaissance, vulnerability analysis & exploitation. Used Nmap for network enumeration across /24 subnet, identifying 50+ live hosts. Exploited misconfigurations on 3 target systems using Metasploit.</p>
+                        <div class="project-tags">
+                            <span class="tag">Nmap</span>
+                            <span class="tag">Metasploit</span>
+                            <span class="tag">TryHackMe</span>
+                            <span class="tag">Red Team</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2: Secure Login System -->
+                <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="project-image">
+                        <div class="project-placeholder">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="https://github.com/animeshbejtechno" target="_blank" class="project-link">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Secure Login System with SQLi Mitigation</h3>
+                        <p>Developed a full-stack web login application with security best practices. Implemented password hashing (bcrypt) and prepared statements, mitigating 100% of SQL Injection and XSS attack vectors — addressing OWASP Top 10 vulnerabilities A1 and A7.</p>
+                        <div class="project-tags">
+                            <span class="tag">PHP</span>
+                            <span class="tag">MySQL</span>
+                            <span class="tag">OWASP</span>
+                            <span class="tag">SQLi Prevention</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3: Virtual Cyber Lab -->
+                <div class="project-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="project-image">
+                        <div class="project-placeholder">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="https://github.com/animeshbejtechno" target="_blank" class="project-link">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Virtual Cyber Lab & OS Hardening</h3>
+                        <p>Built a virtual lab with Kali Linux (attacker) and Metasploitable (target) VMs. Applied comprehensive OS hardening — configured iptables firewall rules, enforced strict user permissions, secured SSH by disabling root login, reducing critical attack vectors by 60%.</p>
+                        <div class="project-tags">
+                            <span class="tag">VirtualBox</span>
+                            <span class="tag">Kali Linux</span>
+                            <span class="tag">iptables</span>
+                            <span class="tag">Hardening</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4: Network Traffic Analysis -->
+                <div class="project-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="project-image">
+                        <div class="project-placeholder">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="https://github.com/animeshbejtechno" target="_blank" class="project-link">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Network Traffic Analysis</h3>
+                        <p>Captured and analyzed over 1 GB of network packets to identify normal and malicious traffic patterns, including DNS exfiltration and HTTP-based attacks. Generated 5+ detailed incident reports documenting suspicious activity and IoCs.</p>
+                        <div class="project-tags">
+                            <span class="tag">Wireshark</span>
+                            <span class="tag">TCPDump</span>
+                            <span class="tag">Forensics</span>
+                            <span class="tag">Incident Response</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="index.html" class="footer-logo">
+                        <span class="logo-bracket">&lt;</span>Animesh<span class="logo-bracket">/&gt;</span>
+                    </a>
+                    <p>Securing the digital world, one vulnerability at a time.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="skills.html">Skills</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="https://github.com/animeshbejtechno" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/animesh-bej-489b39345" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="mailto:animeshbej399@gmail.com"><i class="fas fa-envelope"></i></a>
+                        <a href="https://www.instagram.com/animeshbej" target="_blank"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Animesh Bej. All rights reserved. Made with ❤️</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
