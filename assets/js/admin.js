@@ -50,6 +50,16 @@
     const logoutBtn = document.getElementById('logoutBtn');
 
     if (loginBtn) {
+        // Toggle password visibility
+        const togglePass = document.getElementById('togglePass');
+        if (togglePass) {
+            togglePass.addEventListener('click', () => {
+                const type = passwordInput.type === 'password' ? 'text' : 'password';
+                passwordInput.type = type;
+                togglePass.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+            });
+        }
+
         loginBtn.addEventListener('click', async () => {
             const pass = passwordInput.value;
             const hash = await hashPassword(pass);
