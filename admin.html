@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel | Animesh Bej</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="particles"></div>
+
+    <!-- Login Overlay -->
+    <div class="admin-login-overlay" id="loginOverlay">
+        <div class="login-card">
+            <div class="login-icon">
+                <i class="fas fa-shield-halved"></i>
+            </div>
+            <h2>Admin Access</h2>
+            <p>Enter password to continue</p>
+            <div class="login-form">
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="adminPassword" placeholder="Enter admin password" autocomplete="off">
+                </div>
+                <button class="btn-admin-login" id="loginBtn">
+                    <i class="fas fa-right-to-bracket"></i> Unlock
+                </button>
+                <p class="login-error" id="loginError">Incorrect password</p>
+            </div>
+            <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div class="admin-dashboard" id="adminDashboard" style="display:none;">
+        <!-- Admin Nav -->
+        <nav class="navbar" id="navbar">
+            <div class="nav-container">
+                <a href="index.html" class="nav-logo">
+                    <span class="logo-bracket">&lt;</span>Admin<span class="logo-bracket">/&gt;</span>
+                </a>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#" class="active">Admin Panel</a></li>
+                </ul>
+                <button class="btn-logout" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </div>
+        </nav>
+
+        <section class="page-section">
+            <div class="section-container">
+                <h1 class="section-title" data-aos="fade-up">
+                    <span class="title-accent">Admin</span> Dashboard
+                </h1>
+
+                <!-- Stats Cards -->
+                <div class="admin-stats">
+                    <div class="stat-card">
+                        <i class="fas fa-code"></i>
+                        <div class="stat-info">
+                            <span class="stat-number" id="skillCount">0</span>
+                            <span class="stat-label">Skills</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-certificate"></i>
+                        <div class="stat-info">
+                            <span class="stat-number" id="certCount">0</span>
+                            <span class="stat-label">Certificates</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-project-diagram"></i>
+                        <div class="stat-info">
+                            <span class="stat-number" id="projectCount">0</span>
+                            <span class="stat-label">Projects</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Navigation -->
+                <div class="admin-tabs">
+                    <button class="tab-btn active" data-tab="skills"><i class="fas fa-code"></i> Skills</button>
+                    <button class="tab-btn" data-tab="certificates"><i class="fas fa-certificate"></i> Certificates</button>
+                    <button class="tab-btn" data-tab="projects"><i class="fas fa-project-diagram"></i> Projects</button>
+                    <button class="tab-btn" data-tab="settings"><i class="fas fa-gear"></i> Settings</button>
+                </div>
+
+                <!-- Skills Tab -->
+                <div class="tab-content active" id="tab-skills">
+                    <div class="admin-card">
+                        <h3><i class="fas fa-plus-circle"></i> Add New Skill</h3>
+                        <form id="skillForm" class="admin-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Skill Name</label>
+                                    <input type="text" id="skillName" placeholder="e.g., Docker" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Proficiency (%)</label>
+                                    <input type="number" id="skillProgress" min="0" max="100" placeholder="e.g., 75" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Category</label>
+                                <select id="skillCategory">
+                                    <option value="programming">Programming</option>
+                                    <option value="pentesting">Penetration Testing & VAPT</option>
+                                    <option value="networking">Networking & SIEM</option>
+                                    <option value="frameworks">Frameworks & Security</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn-add"><i class="fas fa-plus"></i> Add Skill</button>
+                        </form>
+                    </div>
+
+                    <div class="admin-card">
+                        <h3><i class="fas fa-list"></i> Added Skills</h3>
+                        <div class="items-list" id="skillsList"></div>
+                    </div>
+                </div>
+
+                <!-- Certificates Tab -->
+                <div class="tab-content" id="tab-certificates">
+                    <div class="admin-card">
+                        <h3><i class="fas fa-plus-circle"></i> Add New Certificate</h3>
+                        <form id="certForm" class="admin-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Certificate Title</label>
+                                    <input type="text" id="certTitle" placeholder="e.g., AWS Cloud Practitioner" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Issuer</label>
+                                    <input type="text" id="certIssuer" placeholder="e.g., Amazon" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Date</label>
+                                    <input type="text" id="certDate" placeholder="e.g., Mar 2026" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Status</label>
+                                    <select id="certStatus">
+                                        <option value="completed">Completed</option>
+                                        <option value="ongoing">Ongoing</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn-add"><i class="fas fa-plus"></i> Add Certificate</button>
+                        </form>
+                    </div>
+
+                    <div class="admin-card">
+                        <h3><i class="fas fa-list"></i> Added Certificates</h3>
+                        <div class="items-list" id="certsList"></div>
+                    </div>
+                </div>
+
+                <!-- Projects Tab -->
+                <div class="tab-content" id="tab-projects">
+                    <div class="admin-card">
+                        <h3><i class="fas fa-plus-circle"></i> Add New Project</h3>
+                        <form id="projectForm" class="admin-form">
+                            <div class="form-group">
+                                <label>Project Title</label>
+                                <input type="text" id="projectTitle" placeholder="e.g., Automated OSINT Tool" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea id="projectDesc" rows="3" placeholder="Brief project description..." required></textarea>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Tech Stack</label>
+                                    <input type="text" id="projectTech" placeholder="e.g., Python, Shodan API" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>GitHub Link (optional)</label>
+                                    <input type="url" id="projectLink" placeholder="https://github.com/...">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn-add"><i class="fas fa-plus"></i> Add Project</button>
+                        </form>
+                    </div>
+
+                    <div class="admin-card">
+                        <h3><i class="fas fa-list"></i> Added Projects</h3>
+                        <div class="items-list" id="projectsList"></div>
+                    </div>
+                </div>
+
+                <!-- Settings Tab -->
+                <div class="tab-content" id="tab-settings">
+                    <div class="admin-card">
+                        <h3><i class="fas fa-key"></i> Change Admin Password</h3>
+                        <form id="passwordForm" class="admin-form">
+                            <div class="form-group">
+                                <label>Current Password</label>
+                                <input type="password" id="currentPass" placeholder="Current password" required>
+                            </div>
+                            <div class="form-group">
+                                <label>New Password</label>
+                                <input type="password" id="newPass" placeholder="New password" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Confirm New Password</label>
+                                <input type="password" id="confirmPass" placeholder="Confirm new password" required>
+                            </div>
+                            <button type="submit" class="btn-add"><i class="fas fa-save"></i> Update Password</button>
+                        </form>
+                    </div>
+
+                    <div class="admin-card">
+                        <h3><i class="fas fa-database"></i> Data Management</h3>
+                        <div class="data-actions">
+                            <button class="btn-export" id="exportBtn"><i class="fas fa-download"></i> Export All Data (JSON)</button>
+                            <label class="btn-import">
+                                <i class="fas fa-upload"></i> Import Data (JSON)
+                                <input type="file" id="importFile" accept=".json" style="display:none;">
+                            </label>
+                            <button class="btn-danger" id="clearBtn"><i class="fas fa-trash"></i> Clear All Data</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMsg">Success!</span>
+    </div>
+
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/admin.js"></script>
+</body>
+</html>
