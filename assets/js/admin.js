@@ -353,4 +353,104 @@
         });
     }
 
+    // --- Profile Picture Upload ---
+    const profilePicInput = document.getElementById('profilePicInput');
+    const profilePreview = document.getElementById('profilePreview');
+    const removeProfilePicBtn = document.getElementById('removeProfilePic');
+    const profileUploadOverlay = document.getElementById('profileUploadOverlay');
+
+    // Load saved profile pic on admin page
+    function loadSavedProfilePic() {
+        const saved = localStorage.getItem('portfolio_profilePic');
+        if (saved && profilePreview) {
+            profilePreview.src = saved;
+            profilePreview.onerror = null;
+            if (removeProfilePicBtn) removeProfilePicBtn.style.display = 'inline-flex';
+        }
+    }
+    loadSavedProfilePic();
+
+    // Click on preview to trigger upload
+    if (profileUploadOverlay) {
+        profileUploadOverlay.addEventListener('click', () => {
+            profilePicInput.click();
+        });
+    }
+
+    if (profilePicInput) {
+        profilePicInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            // Validate file type
+            if (!file.type.startsWith('image/')) {
+                showToast('Please select an image file!');
+                return;
+            }
+
+            // Validate file size (max 2MB)
+            if (file.size > 2 * 1024 * 1024) {
+                showToast('Image must be under 2MB!');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function (event) {
+                // Resize image to reduce storage size
+                const img = new Image();
+                img.onload = function () {
+                    const canvas = document.createElement('canvas');
+                    const maxSize = 400;
+                    let w = img.width;
+                    let h = img.height;
+
+                    // Scale down if needed
+                    if (w > maxSize || h > maxSize) {
+                        if (w > h) {
+                            h = (h / w) * maxSize;
+                            w = maxSize;
+                        } else {
+                            w = (w / h) * maxSize;
+                            h = maxSize;
+                        }
+                    }
+
+                    canvas.width = w;
+                    canvas.height = h;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, w, h);
+
+                    const dataUrl = canvas.toDataURL('image/jpeg', 0.85);
+
+                    try {
+                        localStorage.setItem('portfolio_profilePic', dataUrl);
+                        profilePreview.src = dataUrl;
+                        profilePreview.onerror = null;
+                        if (removeProfilePicBtn) removeProfilePicBtn.style.display = 'inline-flex';
+                        showToast('Profile picture updated! Visible on all pages.');
+                    } catch (err) {
+                        showToast('Image too large for storage. Try a smaller image.');
+                    }
+                };
+                img.src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+            profilePicInput.value = '';
+        });
+    }
+
+    if (removeProfilePicBtn) {
+        removeProfilePicBtn.addEventListener('click', () => {
+            if (confirm('Remove profile picture?')) {
+                localStorage.removeItem('portfolio_profilePic');
+                profilePreview.src = 'assets/images/profile.png';
+                profilePreview.onerror = function() {
+                    this.src = 'https://api.dicebear.com/7.x/avataaars/svg?seed=AnimeshBej&backgroundColor=0a0a2e';
+                };
+                removeProfilePicBtn.style.display = 'none';
+                showToast('Profile picture removed!');
+            }
+        });
+    }
+
 })();

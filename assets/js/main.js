@@ -4,15 +4,33 @@
    ======================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
-    // --- Navbar Scroll Effect ---
+    // --- Navbar Scroll Effect + Scroll Indicator Hide ---
     const navbar = document.getElementById('navbar');
+    const scrollIndicator = document.querySelector('.scroll-indicator');
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
             navbar.classList.add('scrolled');
         } else {
             navbar.classList.remove('scrolled');
         }
+        // Hide scroll indicator once user scrolls
+        if (scrollIndicator) {
+            if (window.scrollY > 80) {
+                scrollIndicator.classList.add('hidden');
+            } else {
+                scrollIndicator.classList.remove('hidden');
+            }
+        }
     });
+
+    // --- Load Profile Picture from localStorage ---
+    const savedProfilePic = localStorage.getItem('portfolio_profilePic');
+    if (savedProfilePic) {
+        document.querySelectorAll('img[alt="Animesh Bej"]').forEach(img => {
+            img.src = savedProfilePic;
+            img.onerror = null; // Remove fallback since we have a saved pic
+        });
+    }
 
     // --- Mobile Menu ---
     const hamburger = document.getElementById('hamburger');

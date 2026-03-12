@@ -197,6 +197,32 @@
 
                 <!-- Settings Tab -->
                 <div class="tab-content" id="tab-settings">
+                    <!-- Profile Picture Section -->
+                    <div class="admin-card">
+                        <h3><i class="fas fa-user-circle"></i> Profile Picture</h3>
+                        <div class="profile-upload-section">
+                            <div class="profile-preview-wrapper">
+                                <div class="profile-preview">
+                                    <img id="profilePreview" src="assets/images/profile.png" alt="Profile" onerror="this.src='https://api.dicebear.com/7.x/avataaars/svg?seed=AnimeshBej&backgroundColor=0a0a2e'">
+                                </div>
+                                <div class="profile-upload-overlay" id="profileUploadOverlay">
+                                    <i class="fas fa-camera"></i>
+                                    <span>Change Photo</span>
+                                </div>
+                            </div>
+                            <div class="profile-upload-actions">
+                                <label class="btn-add btn-upload-pic">
+                                    <i class="fas fa-upload"></i> Upload New Picture
+                                    <input type="file" id="profilePicInput" accept="image/*" style="display:none;">
+                                </label>
+                                <button class="btn-danger btn-remove-pic" id="removeProfilePic" style="display:none;">
+                                    <i class="fas fa-trash"></i> Remove Picture
+                                </button>
+                                <p class="profile-upload-hint"><i class="fas fa-info-circle"></i> Recommended: Square image, at least 300×300px. Max 2MB.</p>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="admin-card">
                         <h3><i class="fas fa-key"></i> Change Admin Password</h3>
                         <form id="passwordForm" class="admin-form">
@@ -240,6 +266,6 @@
     </div>
 
     <script src="assets/js/main.js"></script>
-    <script src="assets/js/admin.js?v=2"></script>
+    <script src="assets/js/admin.js?v=3"></script>
 </body>
 </html>

@@ -202,8 +202,9 @@ ul {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 8rem 2rem 4rem;
+    padding: 8rem 2rem 1.5rem;
     position: relative;
+    gap: 0;
 }
 
 .hero-content {
@@ -387,15 +388,21 @@ ul {
 
 /* Scroll Indicator */
 .scroll-indicator {
-    position: absolute;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
+    margin-top: 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
     animation: fadeInUp 0.8s ease-out 1.4s both;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    flex-shrink: 0;
+    padding-bottom: 1rem;
+}
+
+.scroll-indicator.hidden {
+    opacity: 0;
+    transform: translateY(10px);
+    pointer-events: none;
 }
 
 .mouse {
@@ -413,12 +420,13 @@ ul {
     height: 8px;
     background: var(--accent-primary);
     border-radius: 2px;
-    animation: scrollWheel 2s infinite;
+    animation: scrollWheel 1.5s ease-in-out infinite;
 }
 
 @keyframes scrollWheel {
     0% { opacity: 1; transform: translateY(0); }
-    100% { opacity: 0; transform: translateY(12px); }
+    50% { opacity: 0.5; }
+    100% { opacity: 0; transform: translateY(10px); }
 }
 
 .scroll-indicator p {
@@ -1414,7 +1422,11 @@ ul {
     }
 
     .hero {
-        padding: 6rem 1.5rem 3rem;
+        padding: 6rem 1.5rem 1rem;
+    }
+
+    .scroll-indicator {
+        margin-top: 1.5rem;
     }
 
     .hero-name {
