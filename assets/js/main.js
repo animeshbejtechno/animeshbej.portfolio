@@ -215,4 +215,90 @@ document.addEventListener('DOMContentLoaded', () => {
             link.classList.add('active');
         }
     });
+
+    // --- Load Admin-Added Dynamic Content ---
+    function getAdminData(key) {
+        try { return JSON.parse(localStorage.getItem('portfolio_' + key)) || []; }
+        catch { return []; }
+    }
+
+    // Dynamic Skills
+    if (currentPage === 'skills.html') {
+        const adminSkills = getAdminData('skills');
+        const categoryMap = {
+            programming: 0,
+            pentesting: 1,
+            networking: 2,
+            frameworks: 3
+        };
+        adminSkills.forEach(skill => {
+            const catIndex = categoryMap[skill.category];
+            const categories = document.querySelectorAll('.skill-category .skill-items');
+            if (categories[catIndex]) {
+                const el = document.createElement('div');
+                el.className = 'skill-item';
+                el.innerHTML = `
+                    <div class="skill-info">
+                        <span>${skill.name}</span>
+                        <span>${skill.progress}%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-progress="${skill.progress}"></div>
+                    </div>`;
+                categories[catIndex].appendChild(el);
+                // Animate the new bar
+                const bar = el.querySelector('.skill-progress');
+                setTimeout(() => { bar.style.width = skill.progress + '%'; }, 300);
+            }
+        });
+    }
+
+    // Dynamic Certificates
+    if (currentPage === 'certificates.html') {
+        const adminCerts = getAdminData('certificates');
+        const certsGrid = document.querySelector('.certificates-grid');
+        if (certsGrid && adminCerts.length > 0) {
+            adminCerts.forEach((cert, i) => {
+                const el = document.createElement('div');
+                el.className = 'certificate-card';
+                el.setAttribute('data-aos', 'fade-up');
+                el.setAttribute('data-aos-delay', (600 + i * 100).toString());
+                const icon = cert.status === 'ongoing' ? 'fa-spinner' : 'fa-check-circle';
+                const label = cert.status === 'ongoing' ? 'Ongoing' : 'Completed';
+                el.innerHTML = `
+                    <div class="cert-icon"><i class="fas fa-certificate"></i></div>
+                    <div class="cert-info">
+                        <h3>${cert.title}</h3>
+                        <p class="cert-issuer"><i class="fas fa-building"></i> ${cert.issuer}</p>
+                        <p class="cert-date"><i class="fas fa-calendar"></i> ${cert.date}</p>
+                        <span class="cert-link"><i class="fas ${icon}"></i> ${label}</span>
+                    </div>`;
+                certsGrid.appendChild(el);
+            });
+        }
+    }
+
+    // Dynamic Projects
+    if (currentPage === 'projects.html') {
+        const adminProjects = getAdminData('projects');
+        const projectsGrid = document.querySelector('.projects-grid');
+        if (projectsGrid && adminProjects.length > 0) {
+            adminProjects.forEach((proj, i) => {
+                const el = document.createElement('div');
+                el.className = 'project-card';
+                el.setAttribute('data-aos', 'fade-up');
+                el.setAttribute('data-aos-delay', (500 + i * 100).toString());
+                const tags = proj.tech.split(',').map(t => `<span class="project-tag">${t.trim()}</span>`).join('');
+                el.innerHTML = `
+                    <div class="project-header">
+                        <i class="fas fa-terminal"></i>
+                        ${proj.link ? '<a href="' + proj.link + '" target="_blank" class="project-link"><i class="fas fa-external-link-alt"></i></a>' : ''}
+                    </div>
+                    <h3>${proj.title}</h3>
+                    <p>${proj.desc}</p>
+                    <div class="project-tags">${tags}</div>`;
+                projectsGrid.appendChild(el);
+            });
+        }
+    }
 });
