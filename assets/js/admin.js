@@ -153,12 +153,25 @@
         projectForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const projects = getData('projects');
+            const rawLink = document.getElementById('projectLink').value.trim();
+            let normalizedLink = '';
+
+            if (rawLink) {
+                normalizedLink = /^https?:\/\//i.test(rawLink) ? rawLink : 'https://' + rawLink;
+                try {
+                    new URL(normalizedLink);
+                } catch {
+                    showToast('Please enter a valid project link!');
+                    return;
+                }
+            }
+
             projects.push({
                 id: Date.now(),
                 title: document.getElementById('projectTitle').value,
                 desc: document.getElementById('projectDesc').value,
                 tech: document.getElementById('projectTech').value,
-                link: document.getElementById('projectLink').value
+                link: normalizedLink
             });
             setData('projects', projects);
             projectForm.reset();
