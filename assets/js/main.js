@@ -302,19 +302,35 @@ document.addEventListener('DOMContentLoaded', () => {
         const projectsGrid = document.querySelector('.projects-grid');
         if (projectsGrid && adminProjects.length > 0) {
             adminProjects.forEach((proj, i) => {
+                const title = (proj && proj.title ? String(proj.title) : 'Untitled Project').trim();
+                const desc = (proj && proj.desc ? String(proj.desc) : 'No description provided.').trim();
+                const techRaw = proj && (proj.tech || proj.techStack || proj.tags) ? String(proj.tech || proj.techStack || proj.tags) : '';
+                const tags = techRaw
+                    ? techRaw.split(',').map(t => t.trim()).filter(Boolean).map(t => `<span class="tag">${t}</span>`).join('')
+                    : '<span class="tag">Project</span>';
+                const safeLink = proj && proj.link ? String(proj.link).trim() : '';
+
                 const el = document.createElement('div');
                 el.className = 'project-card';
                 el.setAttribute('data-aos', 'fade-up');
                 el.setAttribute('data-aos-delay', (500 + i * 100).toString());
-                const tags = proj.tech.split(',').map(t => `<span class="project-tag">${t.trim()}</span>`).join('');
                 el.innerHTML = `
-                    <div class="project-header">
-                        <i class="fas fa-terminal"></i>
-                        ${proj.link ? '<a href="' + proj.link + '" target="_blank" class="project-link"><i class="fas fa-external-link-alt"></i></a>' : ''}
+                    <div class="project-image">
+                        <div class="project-placeholder">
+                            <i class="fas fa-terminal"></i>
+                        </div>
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                ${safeLink ? '<a href="' + safeLink + '" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fab fa-github"></i></a>' : ''}
+                            </div>
+                        </div>
                     </div>
-                    <h3>${proj.title}</h3>
-                    <p>${proj.desc}</p>
-                    <div class="project-tags">${tags}</div>`;
+                    <div class="project-info">
+                        <h3>${title}</h3>
+                        <p>${desc}</p>
+                        <div class="project-tags">${tags}</div>
+                    </div>
+                `;
                 projectsGrid.appendChild(el);
             });
         }
